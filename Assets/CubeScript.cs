@@ -3,8 +3,10 @@ using System.Collections;
 
 public class CubeScript : MonoBehaviour
 {
+
+    public Shader shader;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         // Add a MeshFilter component to this entity. This essentially comprises of a
         // mesh definition, which in this example is a collection of vertices, colours 
@@ -19,6 +21,13 @@ public class CubeScript : MonoBehaviour
         MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
         //renderer.material ...
     }
+
+    
+    void OnEnable(){
+        MeshRenderer renderer = this.gameObject.GetComponent<MeshRenderer>();
+        renderer.material.shader = this.shader;
+    }
+
 
     // Method to create a cube mesh with coloured vertices
     Mesh CreateCubeMesh()
@@ -168,6 +177,8 @@ public class CubeScript : MonoBehaviour
             triangles[i] = i;
 
         m.triangles = triangles;
+
+        
 
         return m;
     }
